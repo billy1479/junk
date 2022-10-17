@@ -1,4 +1,3 @@
-# working
 class circularQueue:
     def __init__(self, a):
         self.cqueue = []
