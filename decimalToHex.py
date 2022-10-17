@@ -1,7 +1,5 @@
-# take string of binary from decimal to binary script
-
+# take string of binary from decimal to binary scriptgit
 from math import ceil
-
 
 data = input('Please enter in the decimal you want to be converted to Hexadecimal: ')
 general_array = []
@@ -22,4 +20,25 @@ for i in data:
 #in case no decimal is entered
 if y==[]:
     y = ['0']
+
+x = int(''.join(x))
+y = float(''.join(y)) * 10**(-len(y))
+
+# for X
+temp_state = False
+integer_array = []
+decimal_state = []
+
+# gets remainders and puts them in the ineger_array
+while temp_state == False:
+    if x == 0:
+        temp_state = True
+    else:
+        remainder = x % 16
+        x = x // 16
+        integer_array.append(remainder)
+
+for x in range(len(integer_array), -1, -1):
+    
+
 
