@@ -45,10 +45,15 @@ for value in x:
 general_array.append(temp_array)
 
 
-for i in range(0, len(general_array) - 1):
+for i in range(0, len(general_array)):
     total = 0
     for x in range(len(base_array)-1, -1, -1):
-        if general_array[i] == '1':
+        if general_array[i][x] == '1':
             total = total + base_array[i]
+    print(total)
     hexValue = hex_array[total][1]
+    print(hexValue)
+    general_array[i] = hexValue
+
+print(general_array)
             
