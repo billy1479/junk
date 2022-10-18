@@ -1,7 +1,5 @@
 # only lets up to 4 bits for the decimal part
 # as many bits for the integer part
-from email.mime import base
-
 
 print('Please ensure there are no more than 4 bits after the decimal point - any extra will be ignored.')
 binary_string = input('Please enter in the binary string: ')
@@ -29,6 +27,7 @@ for i in binary_string:
         else:
             x.append(i)
 
+# This is for the integer part
 general_array = []
 temp_array = []
 counter = -1
@@ -44,16 +43,25 @@ for value in x:
 
 general_array.append(temp_array)
 
-
 for i in range(0, len(general_array)):
     total = 0
     for x in range(len(base_array)-1, -1, -1):
         if general_array[i][x] == '1':
-            total = total + base_array[i]
-    print(total)
-    hexValue = hex_array[total][1]
-    print(hexValue)
+            total = total + base_array[x]
+    hexValue = hex_array[total][0]
     general_array[i] = hexValue
 
-print(general_array)
-            
+general_array.append('.')
+
+# This is for the decimal part
+counter = 3
+total = 0
+for i in y:
+    if i == '1':
+        total = total + base_array[counter]
+    counter = counter - 1
+hexValue = hex_array[total][0]
+general_array.append(hexValue)
+
+# this is for outputting the array
+print(''.join(general_array))
