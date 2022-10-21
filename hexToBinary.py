@@ -10,6 +10,7 @@ myValue = input('Please enter in the hex value here: ')
 # split the string into the integer and decimal part
 x = []
 y = []
+temp_array = []
 state = False
 for i in myValue:
     if state == True:
@@ -20,13 +21,21 @@ for i in myValue:
         else:
             x.append(i)
 
-# calculate sum of all integer values
-# can be more efficient with a while loop
-integerTotal = 0
-lengthOfInteger = len(x)
 for a in x:
     for i in range(0, len(hex_array)):
-        if hex_array[]
+        if hex_array[i][0] == a:
+            hexValue = hex_array[i][1]
+    
+    state = False
+    for z in range(3,-1,-1):
+        if hexValue - base_array[z] > 0:
+            temp_array.append('1')
+        else:
+            temp_array.append('0')
+
+    
+    
+
 
 # calculate the sum of the decimal values
 
