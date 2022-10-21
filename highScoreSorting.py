@@ -11,6 +11,7 @@ def highScoreInsertion(H, E):
                     H[x+1] = H[x]
                 H[counter] = E
             else:
+                # This stores the value being removed at the end of the list for it to be outputted to the user to show that it has been removed
                 deletedValue = H[9]
                 print('Sorry - ' + str(deletedValue) + ' has had their highscore removed')
                 H[9] = 'Null'
