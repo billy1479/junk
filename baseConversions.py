@@ -1,4 +1,7 @@
-from code import interact
+from turtle import back
+import math
+from math import ceil
+from itertools import count
 
 
 def power_of_two(a):
@@ -11,6 +14,18 @@ def decimal(a):
     temp_array = []
     for i in range(1, a+1):
         temp_array.append(2**-i)
+    return temp_array
+
+def positive_hex_array(string_length):
+    temp_array = []
+    for i in range(string_length-1, -1, -1):
+        temp_array.append(16**i)
+    return temp_array
+
+def decimal_hex_array(string_length):
+    temp_array = []
+    for i in range(1, string_length+1):
+        temp_array.append(16**-i)
     return temp_array
 
 base_array = [8,4,2,1]
@@ -58,7 +73,7 @@ class Binary:
                 back_total = back_total + decimal_array[c]
 
         output = front_total + back_total
-        return output
+        return str(output)
 
     def convertToHex(self):
         # converts the binary string to the hex equivalent
@@ -123,6 +138,40 @@ class hex:
     def getDecimalValue(self):
         return self.decimalValue
 
+    def convertToDecimal(self):
+        a = positive_hex_array(len(self.integerValue))
+        b = decimal_hex_array(len(self.decimalValue))
+
+        front_total = 0
+        back_total = 0
+
+        for i in range(0, len(self.integerValue)):
+            temp_state = False
+            counter = 0
+            while temp_state == False and counter <= len(hex_array):
+                if hex_array[counter][0] == self.integerValue[i]:
+                    front_total = front_total + (hex_array[counter][1] * a[i])
+                    temp_state = True
+                else:
+                    counter += 1
+
+        for i in range(0, len(self.decimalValue)):
+            temp_state = False
+            counter = 0
+            while temp_state == False and counter <= len(hex_array):
+                if hex_array[counter][0] == self.decimalValue[i]:
+                    back_total = back_total + (hex_array[counter][1] * b[i])
+                    temp_state = True
+                else:
+                    counter += 1
+
+        mainTotal = front_total + back_total
+        return str(mainTotal)
+
+    def convertToBinary(self):
+        # not finished
+        print('N/A')
+
 
 class decimal:
     def __init__(self, data):
@@ -148,3 +197,102 @@ class decimal:
         return self.integerValue
     def getDecimalValue(self):
         return self.decimalValue
+
+    def convertToHex(self):
+        if self.decimalValue==[]:
+            self.decimalValue = ['0']
+
+        self.integerValue = int(''.join(x))
+        self.decimalValue = float(''.join(y)) * 10**(-len(y))
+
+        # for X
+        temp_state = False
+        integer_array = []
+        decimal_state = []
+
+        # gets remainders and puts them in the integer_array
+        while temp_state == False:
+            if self.integerValue == 0:
+                temp_state = True
+            else:
+                remainder = self.integerValue % 16
+                self.integerValue = self.integerValue // 16
+                integer_array.append(remainder)
+
+        for x in range(len(integer_array)-1, -1, -1):
+            temp2_state = False
+            counter = 0
+            while temp2_state == False:
+                if integer_array[x] == hex_array[counter][1]:
+                    temp2_state = True
+                    integer_array[x] = hex_array[counter][0]
+                else:
+                    temp2_state = False
+                    counter = counter + 1
+
+        integer_array = list(reversed(integer_array))
+
+        # for Y - will only allow exact fractions of 16 e.g. 0.625 or 0.5
+        temp_state = False
+        z = int(ceil(self.decimalValue * 16))
+        decimal_value = hex_array[z][0]
+
+        output = str(''.join(integer_array)) + str('.') + str(decimal_value)
+        return str(output)
+
+    def convertToBinary(self):
+        integerPart = int(''.join(self.integerValue))
+        decimalPart = float(''.join(self.decimalValue)) - 1
+
+        integerLog = math.log(integerPart, 2)
+        integerLog = math.ceil(integerLog)
+        decimalLog = math.log(decimalPart, 2)
+        decimalLog = math.ceil(decimalLog)
+
+        integer_array = []
+        decimal_array = []
+
+        for i in range(integerLog, -1, -1):
+            integer_array.append(2**i)
+
+        for i in range(1, decimalLog):
+            decimal_array.append(2**-i)
+
+        binary_array = []
+
+        # for the integer part of the string
+        temp_state = False
+        counter = 0
+        while temp_state == False and counter < len(integer_array):
+            if (integerPart-integer_array[counter]) > 0:
+                binary_array.append('1')
+                integerPart = integerPart - integer_array[counter]
+                counter += 1
+            elif (integerPart-integer_array[counter]) == 0:
+                binary_array.append('1')
+                integerPart = integerPart - integer_array[counter]
+                temp_state = True
+                counter += 1
+            else:
+                binary_array.append('0')
+                counter += 1
+
+        binary_array.append('.')
+
+        temp_state = False
+        counter = 0
+        while temp_state == False and counter < len(decimal_array):
+            if (decimalPart-decimal_array[counter]) > 0:
+                binary_array.append('1')
+                decimalPart = decimalPart - decimal_array[counter]
+                counter += 1
+            elif (decimalPart-decimal_array[counter]) == 0:
+                binary_array.append('1')
+                decimalPart = decimalPart - decimal_array[counter]
+                temp_state = True
+            else:
+                binary_array.append('0')
+                counter += 1
+
+        return str(''.join(binary_array))
+    
