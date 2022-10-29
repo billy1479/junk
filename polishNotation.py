@@ -4,10 +4,6 @@ class Node:
         self.before = before
         self.after = after
 
-########
-#STACKS#
-########
-
 class Stack:
     def __init__(self):
         self.head = None
@@ -21,3 +17,31 @@ class Stack:
         self.head = Node(data, self.head)
     def top(self):
         return self.head.data
+
+polishString = input('Please enter the Polish Notation string: ')
+polishStack = Stack()    
+
+for x in polishString:
+    if x == '+':
+        value1 = int(polishStack.pop())
+        value2 = int(polishStack.pop())
+        answer = value1 + value2
+        polishStack.push(answer)
+    elif x == '-':
+        value1 = int(polishStack.pop())
+        value2 = int(polishStack.pop())
+        answer = value1 - value2
+        polishStack.push(answer)
+    elif x == 'x':
+        value1 = int(polishStack.pop())
+        value2 = int(polishStack.pop())
+        answer = value1 * value2
+        polishStack.push(answer)
+    elif x == '/':
+        value1 = int(polishStack.pop())
+        value2 = int(polishStack.pop())
+        answer = value1 // value2
+        polishStack.push(answer)
+    else:
+        polishStack.push(x)
+print(polishStack.pop())
