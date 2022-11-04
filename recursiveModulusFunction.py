@@ -4,3 +4,5 @@ def modulus(m ,n):
         return m
     else:
         return modulus((m - n), n)
+
+print(modulus(30,7))
