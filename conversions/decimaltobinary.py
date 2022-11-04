@@ -1,7 +1,7 @@
 from itertools import count
 import math
 
-from binarytodecimal import decimal
+from conversions.binarytodecimal import decimal
 decimal_value = input('Please enter in the decimal value here: ')
 
 # Breaks down the input into the integer part and the decimal part
