@@ -5,4 +5,7 @@ def modulus(m ,n):
     else:
         return modulus((m - n), n)
 
-print(modulus(30,7))
+print('Numbers are in the format M % N = OUTPUT')
+m = int(input('Please enter in m: '))
+n = int(input('Please enter in n: '))
+print(modulus(m, n))
