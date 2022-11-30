@@ -1,5 +1,5 @@
 # finds the determinant of a matrix (either 2x2 or 3x3)
-dimension = input('Please enter what dimension the matrix is: 2x2 or 3x3 (Please enter 2 or 3)')
+dimension = int(input('Please enter what dimension the matrix is: 2x2 or 3x3 (Please enter 2 or 3)'))
 if dimension == 2:
     print('---                  ---')
     print('This will calculate the derminant of the 2x2 matrix you are about to enter')
