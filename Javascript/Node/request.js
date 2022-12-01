@@ -16,7 +16,8 @@ http.createServer((request, response) => {
 
         response.writeHead(200, {'Content-type': 'application/json'})
 
-        const responseBody = { headers, method, url, body };
+        let billy = 'hi';
+        const responseBody = { headers, method, url, body, billy };
 
         response.write(JSON.stringify(responseBody))
         response.end();
