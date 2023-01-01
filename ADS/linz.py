@@ -1,7 +1,7 @@
 # attempt 1
 # this works but need to sort out issue with recursion maxing out because the random numbers keep repeating
 import random
-numArray = numArray2 = [0,1,2,3,4,5,6,7]
+numArray = [0,1,2,3,4,5,6,7]
 linzArray = []
 testArray = []
 
